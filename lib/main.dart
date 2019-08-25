@@ -33,7 +33,7 @@ class Legismate extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               icon: new Icon(Icons.people),
-              title: new Text("People"),
+              title: new Text("Districts"),
             ),
             BottomNavigationBarItem(
               icon: new Icon(Icons.view_list),
