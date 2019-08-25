@@ -7,6 +7,13 @@ class EnterAddress extends StatefulWidget {
 }
 
 class _EnterAddressState extends State<EnterAddress> {
+  final addressController = TextEditingController();
+
+  @override
+  void dispose() {
+    addressController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,23 +32,29 @@ class _EnterAddressState extends State<EnterAddress> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          Text('Find Issues That Matter'),
-                          FlatButton(
-                              padding: EdgeInsets.all(40.0),
-                              color: Colors.blue,
-                              child: Column(
-                                children: <Widget>[
-                                  Icon(Icons.my_location),
-                                  Text('Use Location'),
-                                ],
-                              ),
-                              textColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)
-                              ),
-                              onPressed: () {
-                                debugPrint('hi marianne');
-                              }
+                          Text('Find Issues That Matter',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 25)),
+                          Container(
+                            margin: const EdgeInsets.only(top: 25.0),
+                            child: FlatButton(
+                                padding: EdgeInsets.all(20.0),
+                                color: Colors.blue,
+                                child: Column(
+                                  children: <Widget>[
+                                    Icon(Icons.my_location),
+                                    Text('Use Location'),
+                                  ],
+                                ),
+                                textColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)
+                                ),
+                                onPressed: () {
+                                  debugPrint('hi marianne');
+                                }
+                            ),
                           ),
                         ]
                       ),
@@ -59,10 +72,11 @@ class _EnterAddressState extends State<EnterAddress> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                            width: MediaQuery.of(context).size.width * .5,
+                            width: MediaQuery.of(context).size.width * .8,
                             child: TextField(
-                              decoration: new InputDecoration(
-                                labelText: "Enter Your Address",
+                                controller: addressController,
+                                decoration: new InputDecoration(
+                                labelText: "Your Address",
                                 fillColor: Colors.white,
                                 border: new OutlineInputBorder(
                                   borderRadius: new BorderRadius.circular(25.0),
@@ -72,19 +86,19 @@ class _EnterAddressState extends State<EnterAddress> {
                             ),
                           ),
                           Container(
-                            margin: const EdgeInsets.only(top: 10.0),
+                            margin: const EdgeInsets.only(top: 25.0),
                             child: FlatButton(
                               onPressed: () {
-                                debugPrint('Find my rep!');
+                                debugPrint(addressController.text);
                               },
-                              padding: EdgeInsets.all(10.0),
+                              padding: EdgeInsets.all(15.0),
                               color: Colors.blue,
                               textColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)
                               ),
                               child: Text(
-                                  'Find My Rep'
+                                  'Tell me more'
                               ),
                             ),
                           ),
