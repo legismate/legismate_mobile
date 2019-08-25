@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legismate_mobile/components/widgets.dart';
 
 class Districts extends StatelessWidget {
   @override
@@ -48,24 +49,8 @@ class Districts extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Legismate'),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-//          onTap: (newIndex) => setState(() => _index = newIndex),
-//          currentIndex: _index,
-        selectedItemColor: Colors.black,
-        items: [
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.people),
-            title: new Text("People"),
-          ),
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.view_list),
-            title: new Text("Bills"),
-          ),
-        ],
-      ),
+      appBar: ReusableWidgets.getAppBar(),
+      bottomNavigationBar: ReusableWidgets.getBottomNav(),
       body: Container(
           child: CustomScrollView(slivers: <Widget>[
             SliverList(

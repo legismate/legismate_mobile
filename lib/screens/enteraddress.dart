@@ -11,6 +11,7 @@ class EnterAddress extends StatefulWidget {
 
 class _EnterAddressState extends State<EnterAddress> {
   final addressController = TextEditingController();
+  //TODO: use to display progress for the user
   bool districtApiCall = false; //indicates whether or not we've made the district api call
 
   @override
@@ -53,9 +54,7 @@ class _EnterAddressState extends State<EnterAddress> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text('Tell me shit that matters',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 25)),
+                          style: Theme.of(context).textTheme.headline),
                           Container(
                             margin: const EdgeInsets.only(top: 25.0),
                             child: FlatButton(
@@ -96,12 +95,17 @@ class _EnterAddressState extends State<EnterAddress> {
                             child: TextField(
                                 controller: addressController,
                                 decoration: new InputDecoration(
-                                labelText: "Your Address",
-                                fillColor: Colors.white,
-                                border: new OutlineInputBorder(
-                                  borderRadius: new BorderRadius.circular(25.0),
-                                  borderSide: new BorderSide(),
-                                ),
+                                  labelText: "Your Address",
+                                  labelStyle: TextStyle(color: Colors.blue),
+                                  fillColor: Colors.white,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                                    borderSide: BorderSide(color: Colors.blue),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                                    borderSide: BorderSide(color: Colors.blue),
+                                  ),
                               ),
                             ),
                           ),
@@ -110,11 +114,11 @@ class _EnterAddressState extends State<EnterAddress> {
                             child: FlatButton(
                               onPressed: () {
                                 debugPrint(addressController.text);
-//                                setState(() {
-//                                  districtApiCall = true;
-//                                });
-//                                //TODO: validate, make sure that address is populated
-//                                _callDistrictApi(addressController.text);
+                                setState(() {
+                                  districtApiCall = true;
+                                });
+                                //TODO: validate, make sure that address is populated
+                                _callDistrictApi(addressController.text);
                               },
                               padding: EdgeInsets.all(15.0),
                               color: Colors.blue,

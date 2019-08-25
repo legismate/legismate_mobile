@@ -24,7 +24,6 @@ class Legismate extends StatelessWidget {
         brightness: Brightness.light,
         primaryColor: Colors.white,
         accentColor: Colors.black,
-
         // Define the default TextTheme. Use this to specify the default
         // text styling for headlines, titles, bodies of text, and more.
         textTheme: TextTheme(
@@ -39,6 +38,7 @@ class Legismate extends StatelessWidget {
         builder: (buildContext, snapshot) {
           if(snapshot.hasData) {
             if(!snapshot.data){
+//              return BillsHome();
               return EnterAddress();
             }
 
