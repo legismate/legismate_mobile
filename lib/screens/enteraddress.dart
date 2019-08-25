@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:legismate_mobile/services/legismateapi.dart';
+import 'package:legismate_mobile/models/district.dart';
+import 'dart:convert';
 
 class EnterAddress extends StatefulWidget {
   @override
@@ -8,11 +11,28 @@ class EnterAddress extends StatefulWidget {
 
 class _EnterAddressState extends State<EnterAddress> {
   final addressController = TextEditingController();
+  bool districtApiCall = false; //indicates whether or not we've made the district api call
 
   @override
   void dispose() {
     addressController.dispose();
     super.dispose();
+  }
+
+  void _callDistrictApi(String location) {
+    var api = new LegismateApi();
+    api.getDistricts(location).then((district) {
+        _storeDistrictData(district);
+        //TODO: navigate to another page
+      }, onError: (error) {
+      debugPrint('could not retrieve district information');
+    });
+  }
+
+  void _storeDistrictData(District d) async {
+    var sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool('hasData', true);
+    sharedPreferences.setString("district", jsonEncode(d));
   }
 
   @override
@@ -32,7 +52,7 @@ class _EnterAddressState extends State<EnterAddress> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          Text('Find Issues That Matter',
+                          Text('Tell me shit that matters',
                           style: TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 25)),
@@ -52,7 +72,7 @@ class _EnterAddressState extends State<EnterAddress> {
                                     borderRadius: BorderRadius.circular(10)
                                 ),
                                 onPressed: () {
-                                  debugPrint('hi marianne');
+                                  debugPrint('current location btn is for later googlez');
                                 }
                             ),
                           ),
@@ -90,6 +110,11 @@ class _EnterAddressState extends State<EnterAddress> {
                             child: FlatButton(
                               onPressed: () {
                                 debugPrint(addressController.text);
+//                                setState(() {
+//                                  districtApiCall = true;
+//                                });
+//                                //TODO: validate, make sure that address is populated
+//                                _callDistrictApi(addressController.text);
                               },
                               padding: EdgeInsets.all(15.0),
                               color: Colors.blue,
@@ -98,7 +123,7 @@ class _EnterAddressState extends State<EnterAddress> {
                                   borderRadius: BorderRadius.circular(10)
                               ),
                               child: Text(
-                                  'Tell me more'
+                                  'enlighten me!'
                               ),
                             ),
                           ),
