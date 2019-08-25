@@ -4,15 +4,16 @@ class Bill {
   final DateTime agendaDate;
   final String status;
   final String committee;
-  final String legistarID;
+  final int legistarID;
 
   Bill({this.file, this.title, this.agendaDate, this.status, this.committee, this.legistarID});
 
   factory Bill.fromJson(Map<String, dynamic> json) {
+
     return Bill(
       file: json['File'],
       title: json['Title'],
-      agendaDate: json['AgendaDate'],
+      agendaDate: DateTime.parse(json['AgendaDate']),
       status: json['Status'],
       committee: json['Committee'],
       legistarID: json['LegistarID'],

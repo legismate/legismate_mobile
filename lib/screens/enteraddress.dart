@@ -26,7 +26,7 @@ class _EnterAddressState extends State<EnterAddress> {
         _storeDistrictData(district);
         //TODO: navigate to another page
       }, onError: (error) {
-      debugPrint('could not retrieve district information');
+        debugPrint('could not retrieve district information');
     });
   }
 

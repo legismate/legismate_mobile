@@ -9,6 +9,7 @@ class ReusableWidgets {
   }
 
   static getBottomNav() {
+    //TODO: make nav actually work on click
     return BottomNavigationBar(
 //          onTap: (newIndex) => setState(() => _index = newIndex),
 //          currentIndex: _index,

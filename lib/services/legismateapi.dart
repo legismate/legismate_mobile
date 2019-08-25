@@ -4,7 +4,8 @@ import 'package:legismate_mobile/models/district.dart';
 import 'package:legismate_mobile/models/bill.dart';
 
 class LegismateApi {
-  static const _BASE_URL = "localhost:3000";
+  //todo: this pulls from localhost, change to use config so can pull from tf site
+  static const _BASE_URL = "http://192.168.1.15:3000";
 
   Future<District> getDistricts(String location) async {
     final districtUrl = _BASE_URL + "/district?q=$location";
@@ -14,7 +15,7 @@ class LegismateApi {
   }
 
   Future<List<Bill>> getUpcomingBills() async {
-    final upcomingBillsUrl = _BASE_URL + "/district?level=CITY&levelValue=seattle";
+    final upcomingBillsUrl = _BASE_URL + "/bills?level=CITY&levelValue=seattle";
     final response = await http.get(upcomingBillsUrl);
     Iterable list = json.decode(response.body);
     List<Bill> bills = list.map((m) => Bill.fromJson(m)).toList();
