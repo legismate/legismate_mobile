@@ -76,7 +76,6 @@ class PeoplePage extends StatelessWidget {
 
     Widget personCard = Container(
       padding: const EdgeInsets.all(8),
-
       alignment: Alignment.centerLeft,
       color: Colors.black12,
       child: Column(
@@ -101,14 +100,17 @@ class PeoplePage extends StatelessWidget {
           [districtTitleSection],
         ),
       ),
-      SliverGrid(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 1.0,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20),
-        delegate: SliverChildListDelegate(
-          [personCard, personCard, personCard],
+      new SliverPadding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        sliver: SliverGrid(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1.0,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20),
+          delegate: SliverChildListDelegate(
+            [personCard, personCard, personCard],
+          ),
         ),
       ),
     ]));
