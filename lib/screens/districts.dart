@@ -1,7 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DatesCard extends StatelessWidget {
-  DatesCard({Key key}) : super(key: key);
+//  DatesCard({Key key}) : super(key: key);
+
+  DatesCard({
+    @required this.title,
+    @required this.subtitle,
+    @required this.action,
+  });
+
+  final String title;
+  final String subtitle;
+  final String action;
+
+  _launchURL(url) async {
+//    const url = 'https://flutter.io';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +34,9 @@ class DatesCard extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                const ListTile(
-                  title: Text('30 Aug. Voting registration closes'),
-                  subtitle: Text('10 Sept. Voting closes'),
+                ListTile(
+                  title: Text(title),
+                  subtitle: Text(subtitle),
                 ),
                 ButtonTheme.bar(
                   // make buttons use the appropriate styles for cards
@@ -25,7 +45,7 @@ class DatesCard extends StatelessWidget {
                       FlatButton(
                         child: const Text('Register'),
                         onPressed: () {
-                          /* ... */
+                          _launchURL(action);
                         },
                       ),
                       FlatButton(
@@ -44,6 +64,61 @@ class DatesCard extends StatelessWidget {
   }
 }
 
+class PersonCard extends StatelessWidget {
+  PersonCard({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(0),
+      constraints: new BoxConstraints.expand(),
+      child: Card(
+        child: InkWell(
+          splashColor: Colors.black.withAlpha(30),
+          onTap: () {
+            debugPrint('Card tapped.');
+          },
+          child: Column(children: <Widget>[
+            FittedBox(
+              fit: BoxFit.cover,
+              child: Image.network(
+                'https://picsum.photos/200',
+                fit: BoxFit.cover,
+              ),
+            ),
+            ListTile(
+              title: Text('Aaron Andrews'),
+              dense: true,
+            ),
+          ]),
+        ),
+      ),
+    );
+  }
+}
+
+//Widget personCard = Container(
+//    alignment: Alignment.centerLeft,
+//    color: Colors.black12,
+//    child: Column(children: <Widget>[
+//      Expanded(
+//        child: FittedBox(
+//          fit: BoxFit.cover,
+//          child: Image.network(
+//            'https://picsum.photos/200',
+//            fit: BoxFit.cover,
+//          ),
+//        ),
+//      ),
+//      Text(
+//        'Aaron Andrews',
+//        softWrap: true,
+//        style: Theme.of(context).textTheme.title,
+//      ),
+//    ]
+//    )
+//);
+
 class Districts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -57,7 +132,7 @@ class Districts extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: Text(
-                  'Seattle City Council',
+                  'Your City Council',
                   softWrap: true,
                   style: Theme.of(context).textTheme.headline,
                 ),
@@ -71,40 +146,6 @@ class Districts extends StatelessWidget {
         ),
       ]),
     );
-
-    Widget personCard = Container(
-        alignment: Alignment.centerLeft,
-//        alignment: Alignment(0, 0),
-        color: Colors.black12,
-//      child: Column(
-//        children: [
-//          Image.network(
-//            'https://picsum.photos/200',
-//            fit: BoxFit.cover,
-//          ),
-//          Text(
-//            'Aaron Andrews',
-//            softWrap: true,
-//            style: Theme.of(context).textTheme.title,
-//          ),
-//        ],
-//      ),
-        child: Column(children: <Widget>[
-          Expanded(
-            child: FittedBox(
-              fit: BoxFit.cover,
-              child: Image.network(
-                'https://picsum.photos/200',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Text(
-            'Aaron Andrews',
-            softWrap: true,
-            style: Theme.of(context).textTheme.title,
-          ),
-        ]));
 
     return Scaffold(
         appBar: AppBar(
@@ -129,7 +170,11 @@ class Districts extends StatelessWidget {
             child: CustomScrollView(slivers: <Widget>[
           SliverList(
             delegate: SliverChildListDelegate(
-              [DatesCard()],
+              [DatesCard(
+                title: "30 Aug. Voting Registration Closes",
+                subtitle: "10 Sept. Voting begins",
+                action: "https://www.kingcounty.gov/depts/elections/how-to-vote/register-to-vote.aspx"
+              )],
             ),
           ),
           SliverList(
@@ -142,11 +187,11 @@ class Districts extends StatelessWidget {
             sliver: SliverGrid(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-//                  childAspectRatio: 1.0,
+                  childAspectRatio: 0.7,
                   crossAxisSpacing: 20,
                   mainAxisSpacing: 20),
               delegate: SliverChildListDelegate(
-                [personCard, personCard, personCard],
+                [PersonCard(), PersonCard(), PersonCard()],
               ),
             ),
           ),
