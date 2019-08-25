@@ -50,7 +50,7 @@ class PeoplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget districtTitleSection = Container(
-      padding: const EdgeInsets.all(32),
+      padding: const EdgeInsets.all(20),
       child: Row(children: [
         Expanded(
           child: Column(
@@ -75,18 +75,20 @@ class PeoplePage extends StatelessWidget {
     );
 
     Widget personCard = Container(
-      padding: const EdgeInsets.all(32),
+      padding: const EdgeInsets.all(8),
+
+      alignment: Alignment.centerLeft,
+      color: Colors.black12,
       child: Column(
         children: [
-          Container(
-//            alignment: ,
-            padding: const EdgeInsets.only(bottom: 8),
-            color: Colors.black12,
-            child: Text(
-              'Aaron Andrews',
-              softWrap: true,
-              style: Theme.of(context).textTheme.title,
-            ),
+          Image.asset(
+            'https://picsum.photos/200',
+            fit: BoxFit.cover,
+          ),
+          Text(
+            'Aaron Andrews',
+            softWrap: true,
+            style: Theme.of(context).textTheme.title,
           ),
         ],
       ),
@@ -100,8 +102,11 @@ class PeoplePage extends StatelessWidget {
         ),
       ),
       SliverGrid(
-        gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 1.0,
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 20),
         delegate: SliverChildListDelegate(
           [personCard, personCard, personCard],
         ),
