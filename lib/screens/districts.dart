@@ -4,30 +4,6 @@ import 'package:legismate_mobile/components/widgets.dart';
 class Districts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Widget districtTitleSection = Container(
-      padding: const EdgeInsets.all(20),
-      child: Row(children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Text(
-                  'Seattle City Council',
-                  softWrap: true,
-                  style: Theme.of(context).textTheme.headline,
-                ),
-              ),
-              Text(
-                'District 6',
-                style: Theme.of(context).textTheme.subhead,
-              ),
-            ],
-          ),
-        ),
-      ]),
-    );
 
     Widget personCard = Container(
       padding: const EdgeInsets.all(8),
@@ -55,7 +31,7 @@ class Districts extends StatelessWidget {
           child: CustomScrollView(slivers: <Widget>[
             SliverList(
               delegate: SliverChildListDelegate(
-                [districtTitleSection],
+                [ReusableWidgets.getMainHeaders(context, "Seattle City Council", "District 6")],
               ),
             ),
             new SliverPadding(

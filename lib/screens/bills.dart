@@ -7,12 +7,23 @@ class BillsHome extends StatefulWidget {
 }
 
 class _BillsHomeState extends State<BillsHome> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: ReusableWidgets.getAppBar(),
       bottomNavigationBar: ReusableWidgets.getBottomNav(),
-      body: Text('bills, bills, bills man'),
+      body: Container(
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [ReusableWidgets.getMainHeaders(context, "Bills", "keywords")]
+              )
+            )
+          ]
+        )
+      ),
     );
   }
 }

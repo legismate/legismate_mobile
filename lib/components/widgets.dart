@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 //modified from: https://stackoverflow.com/questions/53411890/how-can-i-have-my-appbar-in-a-separate-file-in-flutter-while-still-having-the-wi
 class ReusableWidgets {
   static getAppBar() {
@@ -26,4 +25,32 @@ class ReusableWidgets {
       ],
     );
   }
+
+  static getMainHeaders(BuildContext context, String primaryText, String secondaryText) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      child: Row(children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Text(
+                  primaryText,
+                  softWrap: true,
+                  style: Theme.of(context).textTheme.headline,
+                ),
+              ),
+              Text(
+                secondaryText,
+                style: Theme.of(context).textTheme.subhead,
+              ),
+            ],
+          ),
+        ),
+      ]),
+    );
+  }
+
 }

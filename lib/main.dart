@@ -10,10 +10,9 @@ void main() => runApp(Legismate());
 class Legismate extends StatelessWidget {
 
   Future<bool> _checkForData() async {
-    debugPrint('inside of check for data');
     var sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getBool('hasData') ?? true;
-//    return sharedPreferences.getBool('hasData') ?? false;
+//    return sharedPreferences.getBool('hasData') ?? true;
+    return sharedPreferences.getBool('hasData') ?? false;
   }
 
   @override
@@ -38,8 +37,8 @@ class Legismate extends StatelessWidget {
         builder: (buildContext, snapshot) {
           if(snapshot.hasData) {
             if(!snapshot.data){
-//              return BillsHome();
-              return EnterAddress();
+              return BillsHome();
+//              return EnterAddress();
             }
 
             return Districts();
