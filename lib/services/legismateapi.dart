@@ -5,7 +5,7 @@ import 'package:legismate_mobile/models/bill.dart';
 
 class LegismateApi {
   //todo: this pulls from localhost, change to use config so can pull from tf site
-  static const _BASE_URL = "http://192.168.1.15:3000";
+  static const _BASE_URL = "http://127.0.0.1:3000";
 
   Future<District> getDistricts(String location) async {
     final districtUrl = _BASE_URL + "/district?q=$location";

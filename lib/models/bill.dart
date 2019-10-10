@@ -9,7 +9,6 @@ class Bill {
   Bill({this.file, this.title, this.agendaDate, this.status, this.committee, this.legistarID});
 
   factory Bill.fromJson(Map<String, dynamic> json) {
-
     return Bill(
       file: json['File'],
       title: json['Title'],

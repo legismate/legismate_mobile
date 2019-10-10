@@ -33,7 +33,7 @@ class _BillsHomeState extends State<BillsHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: ReusableWidgets.getAppBar(),
-      bottomNavigationBar: ReusableWidgets.getBottomNav(),
+//      bottomNavigationBar: ReusableWidgets.getBottomNav(),
       body: Container(
         child: CustomScrollView(
           slivers: <Widget>[

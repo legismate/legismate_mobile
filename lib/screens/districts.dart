@@ -26,7 +26,7 @@ class Districts extends StatelessWidget {
 
     return Scaffold(
       appBar: ReusableWidgets.getAppBar(),
-      bottomNavigationBar: ReusableWidgets.getBottomNav(),
+//      bottomNavigationBar: ReusableWidgets.getBottomNav(),
       body: Container(
           child: CustomScrollView(slivers: <Widget>[
             SliverList(

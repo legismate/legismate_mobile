@@ -20,20 +20,28 @@ class _EnterAddressState extends State<EnterAddress> {
     super.dispose();
   }
 
-  void _callDistrictApi(String location) {
-    var api = new LegismateApi();
-    api.getDistricts(location).then((district) {
-        _storeDistrictData(district);
-        //TODO: navigate to another page
-      }, onError: (error) {
-        debugPrint('could not retrieve district information');
-    });
+  void _callDistrictApi(String location, BuildContext context) {
+    debugPrint('inside of call district API');
+    District testDistrict = District(name: 'District 3');
+    _storeDistrictData(testDistrict);
+    Navigator
+        .of(context)
+        .pushNamedAndRemoveUntil('/Districts', (Route<dynamic> route) => false);
+
+    //TODO: hook this up to the district call once it works
+//    var api = new LegismateApi();
+//    api.getDistricts(location).then((district) {
+//        _storeDistrictData(district);
+//        //TODO: navigate to another page
+//      }, onError: (error) {
+//        debugPrint('could not retrieve district information');
+//    });
   }
 
   void _storeDistrictData(District d) async {
     var sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setBool('hasData', true);
-    sharedPreferences.setString("district", jsonEncode(d));
+    sharedPreferences.setString('district', jsonEncode(d));
   }
 
   @override
@@ -118,7 +126,7 @@ class _EnterAddressState extends State<EnterAddress> {
                                   districtApiCall = true;
                                 });
                                 //TODO: validate, make sure that address is populated
-                                _callDistrictApi(addressController.text);
+                                _callDistrictApi(addressController.text, context);
                               },
                               padding: EdgeInsets.all(15.0),
                               color: Colors.blue,

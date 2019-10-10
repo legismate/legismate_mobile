@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:legismate_mobile/components/destination.dart';
 import 'package:legismate_mobile/screens/enteraddress.dart';
 import 'package:legismate_mobile/screens/bills.dart';
 import 'package:legismate_mobile/screens/districts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 
 void main() => runApp(Legismate());
@@ -11,7 +13,6 @@ class Legismate extends StatelessWidget {
 
   Future<bool> _checkForData() async {
     var sharedPreferences = await SharedPreferences.getInstance();
-//    return sharedPreferences.getBool('hasData') ?? true;
     return sharedPreferences.getBool('hasData') ?? false;
   }
 
@@ -35,13 +36,16 @@ class Legismate extends StatelessWidget {
       home: FutureBuilder<bool>(
         future: _checkForData(),
         builder: (buildContext, snapshot) {
+          debugPrint('inside of home builder!');
           if(snapshot.hasData) {
+            debugPrint('we apparently have data');
             if(!snapshot.data){
-              return BillsHome();
-//              return EnterAddress();
+              debugPrint('data is false');
+              return EnterAddress();
+            } else {
+              return DestinationWrapper();
             }
 
-            return Districts();
           } else {
             // Return loading screen while reading preferences
             return Center(child: CircularProgressIndicator());
@@ -49,9 +53,9 @@ class Legismate extends StatelessWidget {
       },
     ),
     routes: <String, WidgetBuilder>{
-        //TODO: add additional routes here
         '/EnterAddress': (context) => EnterAddress(),
         '/Bills': (context) => BillsHome(),
+        '/Districts': (context) => Districts(),
     });
   }
 }
